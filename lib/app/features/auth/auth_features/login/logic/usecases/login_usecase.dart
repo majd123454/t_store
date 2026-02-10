@@ -1,0 +1,13 @@
+import 'package:dartz/dartz.dart';
+import 'package:news_app/app/features/auth/data/models/user_model.dart';
+import 'package:news_app/app/features/auth/data/repositories/login_repo.dart';
+
+class LoginUseCase {
+  final LoginRepository repository;
+
+  LoginUseCase(this.repository);
+
+  Future<Either<String, UserEntity>> call(String email, String password) async {
+    return await repository.signIn(email: email, password: password);
+  }
+}
