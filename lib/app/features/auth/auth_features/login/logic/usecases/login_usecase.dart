@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:news_app/app/features/auth/data/models/user_model.dart';
-import 'package:news_app/app/features/auth/data/repositories/login_repo.dart';
+import 'package:news_app/app/features/auth/data/repositories/auth_repo.dart';
 
 class LoginUseCase {
-  final LoginRepository repository;
+  final AuthRepository repository;
 
   LoginUseCase(this.repository);
 

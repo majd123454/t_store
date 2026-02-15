@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:news_app/app/core/services/supabase/supabase_service.dart';
 import 'package:news_app/app/features/auth/data/models/user_model.dart';
-import 'package:news_app/app/features/auth/data/repositories/login_repo.dart';
+import 'package:news_app/app/features/auth/data/repositories/auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginRepositoryImpl implements LoginRepository {
+class AuthRepositoryImpl implements AuthRepository {
   final SupabaseService supabase;
 
-  LoginRepositoryImpl(this.supabase);
+  AuthRepositoryImpl(this.supabase);
 
   @override
   Future<Either<String, UserEntity>> signIn({
@@ -23,6 +23,39 @@ class LoginRepositoryImpl implements LoginRepository {
 
       return Right(
         UserEntity(id: response.user!.id, email: response.user!.email ?? email),
+      );
+    } on AuthException catch (e) {
+      return Left(_getAuthErrorMessage(e.message));
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, UserEntity>> signUp({
+    required String email,
+    required String password,
+    required String fullName,
+    String? phone,
+  }) async {
+    try {
+      final response = await supabase.signUp(
+        email: email,
+        password: password,
+        data: {'full_name': fullName, 'phone': phone},
+      );
+
+      if (response.user == null) {
+        return const Left('فشل إنشاء الحساب');
+      }
+
+      return Right(
+        UserEntity(
+          id: response.user!.id,
+          email: email,
+          fullName: fullName,
+          phone: phone,
+        ),
       );
     } on AuthException catch (e) {
       return Left(_getAuthErrorMessage(e.message));

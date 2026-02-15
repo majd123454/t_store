@@ -6,6 +6,8 @@ import 'package:news_app/app/core/services/supabase/supabase_service.dart';
 import 'package:news_app/shop.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // مهم جدًا
+
   // Load environment variables
   await dotenv.load(fileName: '.env');
 

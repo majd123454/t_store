@@ -1,11 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/app/features/auth/auth_features/signup/logic/signup_usecase.dart';
 import 'package:news_app/app/features/auth/logic/cubit/auth_state.dart';
 import 'package:news_app/app/features/auth/auth_features/login/logic/usecases/login_usecase.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
+  final SignupUseCase signupUseCase;
 
-  AuthCubit(this.loginUseCase) : super(AuthInitial());
+  AuthCubit({required this.loginUseCase, required this.signupUseCase})
+    : super(AuthInitial());
 
   Future<void> signIn({required String email, required String password}) async {
     emit(AuthLoading());
@@ -19,5 +22,25 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError(error));
       }
     }, (user) => emit(AuthAuthenticated(user)));
+  }
+
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String fullName,
+    String? phone,
+  }) async {
+    emit(AuthLoading());
+
+    final result = await signupUseCase(
+      email: email,
+      password: password,
+      fullName: fullName,
+      phone: phone,
+    );
+    result.fold(
+      (error) => emit(AuthError(error)),
+      (user) => emit(AuthEmailConfirmationRequired(email)),
+    );
   }
 }

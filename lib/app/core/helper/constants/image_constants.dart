@@ -1,4 +1,10 @@
 class TImages {
+  // -- Animations
+  static const String deliveredEmailIllustration =
+      "assets/images/sammy-line-come-back-later.png";
+  static const String staticSuccessIllustration =
+      "assets/images/sammy-line-success.png";
+
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
       "assets/on_boarding_images/sammy-line-delivery.gif";
