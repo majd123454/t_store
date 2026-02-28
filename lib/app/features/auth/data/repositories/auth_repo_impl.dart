@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:first_project/app/core/helper/logger.dart';
 import 'package:first_project/app/features/auth/data/repositories/auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -26,8 +27,10 @@ class AuthRepositoryImpl implements AuthRepository {
         UserEntity(id: response.user!.id, email: response.user!.email ?? email),
       );
     } on AuthException catch (e) {
+      logger(e.message);
       return Left(_getAuthErrorMessage(e.message));
     } catch (e) {
+      logger(e.toString());
       return Left(e.toString());
     }
   }

@@ -48,6 +48,11 @@ dependencies:
   dart_either: ^2.0.0
   dartz: ^0.10.1
   get_it: ^9.2.0
+  shimmer: ^3.0.0
+  carousel_slider: ^5.1.2
+  cached_network_image: ^3.4.1
+  dio: ^5.9.1
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:

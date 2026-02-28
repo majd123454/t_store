@@ -74,4 +74,37 @@ class TTexts {
   static const String settingsView = "Settings";
   static const String storeView = "Store";
 
+  // -- Home
+  static const String homeAppbarTitle = "Good day for shopping";
+  static const String homeAppbarSubTitle = "Mahmoud Hamdy";
+  static const String searchContainer = "Search in Store";
+  static const String popularCategories = "Popular Categories";
+
+//list of categories
+  static const List<String> categories = [
+    "beauty",
+    "fragrances",
+    "furniture",
+    "groceries",
+    "home-decoration",
+    "kitchen-accessories",
+    "laptops",
+    "mens-shirts",
+    "mens-shoes",
+    "mens-watches",
+    "mobile-accessories",
+    "motorcycle",
+    "skin-care",
+    "smartphones",
+    "sports-accessories",
+    "sunglasses",
+    "tablets",
+    "tops",
+    "vehicle",
+    "womens-bags",
+    "womens-dresses",
+    "womens-jewellery",
+    "womens-shoes",
+    "womens-watches"
+  ];
 }

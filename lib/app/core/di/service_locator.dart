@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:first_project/app/core/services/network/dio_client.dart';
+import 'package:first_project/app/features/home/data/data_source_remote/product_remote_data_source.dart';
 import 'package:first_project/app/features/navigation_bar/logic/cubit/navigation_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -25,4 +28,9 @@ Future<void> setupServiceLocator() async {
   sl.registerLazySingleton(() => SignupUseCase(sl()));
   // ==================== Bottom Navigation Bar ====================
   sl.registerFactory(() => NavigationCubit());
+
+    // Services
+  sl.registerSingleton<DioClient>(DioClient());
+  // DataSources
+  sl.registerSingleton<ProductRemoteDataSource>(ProductRemoteDataSourceImpl(dio: sl()));
 }
