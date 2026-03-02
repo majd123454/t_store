@@ -1,6 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:first_project/app/core/services/network/dio_client.dart';
+import 'package:first_project/app/features/chat/data/repository/chat_repository.dart';
+import 'package:first_project/app/features/chat/data/repository/chat_repository_impl.dart';
+import 'package:first_project/app/features/chat/logic/cubit/chat_cubit.dart';
 import 'package:first_project/app/features/home/data/data_source_remote/product_remote_data_source.dart';
+import 'package:first_project/app/features/home/data/repositories/product_repository.dart';
+import 'package:first_project/app/features/home/data/repositories/product_repository_impl.dart';
+import 'package:first_project/app/features/home/logic/cubit/product_cubit.dart';
+import 'package:first_project/app/features/home/logic/use_cases/get_products_list_usecase.dart';
 import 'package:first_project/app/features/navigation_bar/logic/cubit/navigation_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,4 +40,31 @@ Future<void> setupServiceLocator() async {
   sl.registerSingleton<DioClient>(DioClient());
   // DataSources
   sl.registerSingleton<ProductRemoteDataSource>(ProductRemoteDataSourceImpl(dio: sl()));
+
+    // ==================== Products ====================
+
+  // Repository
+  sl.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImpl( remoteDataSource: sl()),
+  );
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetProductsListUsecase( productRepository: sl()));
+  
+  // Cubit
+  sl.registerFactory(
+    () => ProductCubit( getProductsListUsecase: sl(),
+    ),
+  );
+
+
+// ==================== Chat ====================
+  // Repository
+  sl.registerLazySingleton<ChatRepository>(
+    () => ChatRepositoryImpl(supabaseService: sl()),
+  );
+
+  // Cubit
+  sl.registerFactory(() => ChatCubit(repository: sl()));
+
 }

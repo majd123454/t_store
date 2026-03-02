@@ -1,6 +1,8 @@
 import 'package:first_project/app/core/helper/constants/sizes.dart';
+import 'package:first_project/app/core/helper/extensions.dart';
 import 'package:first_project/app/core/helper/spacing.dart';
 import 'package:first_project/app/core/models/circular_icon_view_model.dart';
+import 'package:first_project/app/core/routing/routes.dart';
 import 'package:first_project/app/core/theming/app_colors.dart';
 import 'package:first_project/app/core/widgets/brand_title_with_verification.dart';
 import 'package:first_project/app/core/widgets/circular_icon.dart';
@@ -23,7 +25,7 @@ class VerticalProductCard extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: () {
-        // THelperFunctions.navigateToScreen(context, const ProductDetailsView());
+        context.pushNamed(Routes.productDetails,);
       },
       child: Container(
         width: 180,

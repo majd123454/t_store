@@ -1,6 +1,7 @@
 import 'package:first_project/app/core/routing/routes.dart';
 import 'package:first_project/app/features/navigation_bar/logic/cubit/navigation_cubit.dart';
 import 'package:first_project/app/features/navigation_bar/ui/navigation_bar.dart';
+import 'package:first_project/app/features/product_details/ui/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,10 +41,14 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => EmailVerifiedSuccessfully());
       case Routes.navigation:
         return MaterialPageRoute(builder: (_) => 
-        BlocProvider(
-          create: (BuildContext context) => sl<NavigationCubit>(),
-        child: NavigationButton()
-        )
+            BlocProvider(
+              create: (BuildContext context) => sl<NavigationCubit>()..initializeScreensList(),
+            child: NavigationButton()
+            )
+        );
+      case Routes.productDetails:
+        return MaterialPageRoute(builder: (_) => 
+            ProductDetailsView()
         );
       default:
         return MaterialPageRoute(builder: (_) => Text('No Route Found'));
