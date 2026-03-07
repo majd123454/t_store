@@ -4,6 +4,8 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
+  awesome_notifications
+  firebase_core
   url_launcher_windows
 )
 

@@ -26,7 +26,6 @@ class ChatCubit extends Cubit<ChatState> {
 
       if (message.senderId == _currentOtherUserId ||
           message.receiverId == _currentOtherUserId) {
-        // Ignore stream items that are older or equal to the latest known message
         if (message.createdAt != null && _latestMessageAt != null) {
           if (!message.createdAt!.isAfter(_latestMessageAt!)) return;
         }
@@ -98,7 +97,7 @@ class ChatCubit extends Cubit<ChatState> {
     required String content,
     MessageType messageType = MessageType.text,
   }) async {
-    emit(MessageSending());
+    // emit(MessageSending());
 
     final result = await repository.sendMessage(
       receiverId: receiverId,

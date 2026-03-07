@@ -5,7 +5,7 @@ import 'package:first_project/app/features/favorites/ui/favorite_screen.dart';
 import 'package:first_project/app/features/home/logic/cubit/product_cubit.dart';
 import 'package:first_project/app/features/home/ui/home_screen.dart';
 import 'package:first_project/app/features/navigation_bar/logic/cubit/navigation_state.dart';
-import 'package:first_project/app/features/profile/ui/profile_screen.dart';
+import 'package:first_project/app/features/settings/ui/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -30,7 +30,7 @@ class NavigationCubit extends Cubit<NavigationState>{
         child: const ChatScreen(),
       ),
       const WishlistView(),
-      const ProfileScreen(),
+      const SettingsView(),
     ];
   }
 

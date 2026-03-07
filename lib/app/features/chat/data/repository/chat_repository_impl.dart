@@ -174,19 +174,19 @@ class ChatRepositoryImpl implements ChatRepository {
             try {
               final row = item;
               // fetch sender profile
-              try {
-                final profileResp = await supabaseService.client
-                    .from(SupabaseTables.profiles)
-                    .select('full_name, avatar_url')
-                    .eq('id', row['sender_id'])
-                    .single();
+              // try {
+              //   final profileResp = await supabaseService.client
+              //       .from(SupabaseTables.profiles)
+              //       .select('full_name, avatar_url')
+              //       .eq('id', row['sender_id'])
+              //       .single();
 
-                final profile = profileResp;
-                row['sender'] = {
-                  'full_name': profile['full_name'],
-                  'avatar_url': profile['avatar_url'],
-                };
-              } catch (_) {}
+              //   final profile = profileResp;
+              //   row['sender'] = {
+              //     'full_name': profile['full_name'],
+              //     'avatar_url': profile['avatar_url'],
+              //   };
+              // } catch (_) {}
 
               _messagesController?.add(ChatMessageModel.fromJson(row));
             } catch (_) {}

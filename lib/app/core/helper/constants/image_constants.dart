@@ -107,4 +107,8 @@ class TImages {
       "assets/images/products/samsung_s9_mobile_withback.png";
   static const String productImage13 =
       "assets/images/products/samsung_s9_mobile_back.png";
+
+        //Profile
+  static const String user = "assets/images/content/user.png";
+
 }
