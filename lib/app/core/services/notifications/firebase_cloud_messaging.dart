@@ -39,6 +39,26 @@ class NotificationService {
     return await FirebaseMessaging.instance.isSupported();
   }
 
+  Future<void> stopNotifications() async {
+    try {
+      logger('stopNotifications');
+      
+      // حذف الـ FCM token
+      await deleteToken();
+      
+      // إيقاف الـ listeners
+      // (إعادة تعين البث الفارغ يقطعه)
+      FirebaseMessaging.onMessage.drain();
+      
+      // حذف جميع الاشعارات المعروضة
+      await awesomeNotifications.cancelAll();
+      
+      logger('Notifications stopped successfully');
+    } catch (e) {
+      logger('Error stopping notifications: $e', name: 'stopNotifications error');
+    }
+  }
+
   Future<void> requestPermission() async {
     try {
       await FirebaseMessaging.instance.requestPermission();

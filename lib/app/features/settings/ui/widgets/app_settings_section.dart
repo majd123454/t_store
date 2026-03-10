@@ -26,11 +26,10 @@ class AppSettingsSection extends StatelessWidget {
         const SizedBox(height: TSizes.spaceBtwSections),
         SizedBox(
           width: double.infinity,
-          child: OutlinedButton(
+          child: OutlinedButton( 
             onPressed: () async{
-              await NotificationService.instance.deleteToken();
-              String? token = await NotificationService.instance.getFcmToken();
-              logger(token.toString());
+              // إيقاف الاشعارات بشكل كامل
+              await NotificationService.instance.stopNotifications();
               context.pushReplacementNamed(Routes.login);
             },
             child: const Text("Logout"),

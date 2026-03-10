@@ -3,6 +3,11 @@ import 'package:first_project/app/core/services/network/dio_client.dart';
 import 'package:first_project/app/features/chat/data/repository/chat_repository.dart';
 import 'package:first_project/app/features/chat/data/repository/chat_repository_impl.dart';
 import 'package:first_project/app/features/chat/logic/cubit/chat_cubit.dart';
+import 'package:first_project/app/features/favorites/data/datasources/favorites_data_source.dart';
+import 'package:first_project/app/features/favorites/data/repo/favorites_repo.dart';
+import 'package:first_project/app/features/favorites/data/repo/favorites_repo_impl.dart';
+import 'package:first_project/app/features/favorites/logic/cubit/favorites_cubit.dart';
+import 'package:first_project/app/features/favorites/logic/usecases/favorites_usecase.dart';
 import 'package:first_project/app/features/home/data/data_source_remote/product_remote_data_source.dart';
 import 'package:first_project/app/features/home/data/repositories/product_repository.dart';
 import 'package:first_project/app/features/home/data/repositories/product_repository_impl.dart';
@@ -67,4 +72,20 @@ Future<void> setupServiceLocator() async {
   // Cubit
   sl.registerFactory(() => ChatCubit(repository: sl()));
 
+  // ==================== Favorites ====================
+  // Data Source
+  sl.registerLazySingleton<FavoritesDataSource>(
+    () => FavoritesDataSourceImpl(dioClient: sl()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImpl(dataSource: sl()),
+  );
+
+  // Use Case
+  sl.registerLazySingleton(() => GetFavoritesUseCase(repository: sl()),);
+
+  // cubit
+  sl.registerFactory(() => FavoritesCubit(getFavoritesUseCase: sl()));
 }
